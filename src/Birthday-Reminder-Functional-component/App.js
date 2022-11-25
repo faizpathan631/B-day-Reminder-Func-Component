@@ -20,9 +20,10 @@ export default function App() {
         <button id='add' onClick={() => setAddPerson(true)}>
           Add another person
         </button>
+        &nbsp;&nbsp;
+        <button onClick={() => setPeople([])}>clear all</button>
         <List people={people} />
         <A></A>
-        <button onClick={() => setPeople([])}>clear all</button>
       </Cont.Provider>
 
       <Modal
