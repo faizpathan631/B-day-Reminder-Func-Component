@@ -7,16 +7,10 @@ function AddNew({ people, closeModal, ...rest }) {
     age: '',
     image: '',
   })
-  useEffect(
-    (currentStates) => {
-      setCurrentStates({
-        ...currentStates,
-        id: Date.now(),
-      })
-    },
-    [people.length]
-  )
 
+  const nullCheck = (val) => {
+    return val === null || val === undefined || val === ''
+  }
   const handleInputChange = (event) => {
     setCurrentStates({
       ...currentStates,
@@ -50,6 +44,7 @@ function AddNew({ people, closeModal, ...rest }) {
         name='age'
         id='age'
         type='number'
+        min={0}
         onChange={(e) => handleInputChange(e)}
         value={currentStates.age}
       />
@@ -58,6 +53,11 @@ function AddNew({ people, closeModal, ...rest }) {
       <br />
       <input
         type='submit'
+        disabled={
+          nullCheck(currentStates.id) ||
+          nullCheck(currentStates.name) ||
+          nullCheck(currentStates.age)
+        }
         onClick={() => {
           people.push(currentStates)
           closeModal()
